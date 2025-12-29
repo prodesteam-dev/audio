@@ -7,70 +7,79 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      line-height: 1.6;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-    }
-    .item {
       margin-bottom: 20px;
     }
-    .name {
+    audio {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+    li:hover {
+      background: #f0f4ff;
+    }
+    li.active {
+      background: #e6ecff;
       font-weight: bold;
-      margin-bottom: 6px;
+      color: #1a4cff;
     }
   </style>
 </head>
 <body>
 
-  <h1>File nghe</h1>
+  <div class="container">
+    <h1>File nghe</h1>
 
-  <div class="item">
-    <div class="name">Unit 1</div>
-    <audio controls src="Unit_1.mp3"></audio>
+    <audio id="player" controls></audio>
+
+    <ul id="playlist">
+      <li data-src="Unit_1.mp3">Unit 1</li>
+      <li data-src="Unit_2.mp3">Unit 2</li>
+      <li data-src="Unit_3.mp3">Unit 3</li>
+      <li data-src="Unit_4.mp3">Unit 4</li>
+      <li data-src="Unit_5.mp3">Unit 5</li>
+      <li data-src="Unit_6.mp3">Unit 6</li>
+      <li data-src="Unit_7.mp3">Unit 7</li>
+      <li data-src="Unit_8.mp3">Unit 8</li>
+      <li data-src="Final_test_1.mp3">Final Test 1</li>
+    </ul>
   </div>
 
-  <div class="item">
-    <div class="name">Unit 2</div>
-    <audio controls src="Unit_2.mp3"></audio>
-  </div>
+  <script>
+    const player = document.getElementById("player");
+    const items = document.querySelectorAll("#playlist li");
 
-  <div class="item">
-    <div class="name">Unit 3</div>
-    <audio controls src="Unit_3.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Unit 4</div>
-    <audio controls src="Unit_4.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Unit 5</div>
-    <audio controls src="Unit_5.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Unit 6</div>
-    <audio controls src="Unit_6.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Unit 7</div>
-    <audio controls src="Unit_7.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Unit 8</div>
-    <audio controls src="Unit_8.mp3"></audio>
-  </div>
-
-  <div class="item">
-    <div class="name">Final Test 1</div>
-    <audio controls src="Final_test_1.mp3"></audio>
-  </div>
+    items.forEach(item => {
+      item.addEventListener("click", () => {
+        items.forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+        player.src = item.dataset.src;
+        player.play();
+      });
+    });
+  </script>
 
 </body>
 </html>
